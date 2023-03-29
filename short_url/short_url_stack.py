@@ -24,16 +24,17 @@ class ShortUrlStack(Stack):
 
         #Initialising the existing resource details as variables
         
-        VPC_ID = '<VPC-ID>'                     #Enter your VPC ID
-        VPC_CIDR = '<VPC-CIDR>'                 #Enter your VPC CIDR
-        #APIGW_CIDR = '<API-GATEWAY-CIDR>'      #Enter your API GATEWAY CIDR
+        VPC_ID = '<VPC-ID>'                                           #Enter your VPC ID
+        VPC_CIDR = '<VPC-CIDR>'                                       #Enter your VPC CIDR
+        #APIGW_CIDR = '<API-GATEWAY-CIDR>'                            #Enter your API GATEWAY CIDR
         SUBNET_IDS = ["<SUBNET-ID-2>", "<SUBNET-ID-2>"]               #Enter your Subnet ID's
         ROUTETABLE_IDS = ["<ROUTE-TABLE-ID-1>", "<ROUTE-TABLE-ID-2>"] #Enter your Route Table ID
-        FQDN = '<FQDN>'                         #Enter your ACM FQDN
-        ACM_CERT_ARN = '<ACM Certificate ARN>'  #Enter your ACM Certificate ARN
+        FQDN = '<FQDN>'                                               #Enter your ACM FQDN
+        ACM_CERT_ARN = '<ACM Certificate ARN>'                        #Enter your ACM Certificate ARN
 
         #Creating S3 Bucket with with auto-delete policies
-        bkt = s3.Bucket(self, "<S3 Bucket Name>",    #Enter Name for S3 Bucket    
+   
+        bkt = s3.Bucket(self, "<S3 Bucket Name>",                     #Enter Name for S3 Bucket    
                     auto_delete_objects=True,
                     public_read_access=True,
                     removal_policy= removalPolicy.DESTROY,
@@ -46,10 +47,12 @@ class ShortUrlStack(Stack):
                                 ])
         
         #Creating the ACM Certificate
+        
         cert = acm.Certificate. from_certificate_arn(self,'sURL-cert', 
                     ACM_CERT_ARN)
 
         #Creating Cloudfront Distribution
+        
         dist = cldfrnt.Distribution(self, "sURL-cldfrnt",
                     default_behavior= cldfrnt.BehaviorOptions(
                     origin=origins.HttpOrigin(domain_name=bkt.bucket_website_domain_name)),
@@ -58,6 +61,7 @@ class ShortUrlStack(Stack):
                         )
 
         #Retrieve existing VPC Configurations
+        
         vpcWSubnets = ec2.Vpc.from_vpc_attributes(self,"existing-VPC",
                             vpc_id=VPC_ID,
                             vpc_cidr_block=VPC_CIDR,
@@ -67,6 +71,7 @@ class ShortUrlStack(Stack):
         
 
         # HTTPS Listener and HTTPS Security Group for Lambda Function
+        
         https_sg = ec2.SecurityGroup(self, 
                         "HttpsInbound",
                         vpc=vpcWSubnets,
@@ -81,6 +86,7 @@ class ShortUrlStack(Stack):
                         description='allow HTTPS access from API Gateway VPC')
             
         #Lambda Function to control access
+        
         func = lmbda.Function(self, "sURL-lmbda",
                     runtime=lmbda.Runtime.PYTHON_3_9,
                     code=lmbda.Code.from_asset('./lambda/'),
@@ -93,6 +99,7 @@ class ShortUrlStack(Stack):
                     )
 
         #Policy that allows the Lambda function to access the S3 bucket hosting the website
+        
         func.role.attach_inline_policy(iam.Policy(self,"allow-sURL-BucketAccess",
                     statements=[iam.PolicyStatement( # Restrict to listing and describing tables
                                     effect=iam.Effect.ALLOW,
@@ -127,6 +134,8 @@ class ShortUrlStack(Stack):
         # apiGwy.root.add_method('POST', 
         #             apg.LambdaIntegration(handler=func,
         #                     proxy=True, ))
+        
+        #Prints the Output of S3 Bucket, Cloudfront Distribution & Lambda Function
         output(self, "S3Bucket", value=bkt.bucket_name)
         output(self, "Distribution", value=dist.distribution_id)
         output(self, "Lambda", value=func.function_name)
