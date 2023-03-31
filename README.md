@@ -9,10 +9,6 @@ Installation of CDK
 ```
 python -m pip install aws-cdk-lib
 ```
-To use the CDK library files installed use the below statement to import it to your script
-```
-import aws_cdk as cdk
-```
 Pre-requisites for AWS CDK in Python
 --------------------------------------------------------------------------------
 ```
