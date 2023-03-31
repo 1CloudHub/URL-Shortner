@@ -65,6 +65,11 @@ Refer the below output:
 
 ![CDK_DIFF](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/cdk_diff.jpg)
 
+CDK Deploy - To deploy the resources in the stack in AWS Cloud
+-------------------------------------------------------------------------
+```
+cdk deploy
+```
 Configure the ACM in AWS Console
 -------------------------------------------
 Create a Private Domain of your own in the ACM and configure it to the respective Cloudfront Distribution created in the above deployment.
@@ -74,3 +79,10 @@ Configure Route 53
 Create a CNAME Record with the ACM certificate CNAME record and Value
 
 Now test the lambda function with an URL as input and get the output as Shortened URL with private domain:thumbsup:
+
+CDK Destroy - To delete all the resources in the stack from the AWS Cloud
+--------------------------------------------------------------------------
+```
+cdk destroy
+```
+
