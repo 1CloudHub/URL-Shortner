@@ -34,7 +34,7 @@ Import the Python and lambda scripts available in the repo
 
 Replace the lambda code and short-url python code as per the below file-structure
 
-![CDK_INIT]([https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/cdk_init.jpg](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/file_structure.jpg))
+![CDK_INIT](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/file_structure.jpg)
 
 Install requirements.txt
 ------------------------
