@@ -22,14 +22,6 @@ Steps to use the URL Shortener CDK Script available in the repo
 mkdir url-shortener             # Enter your Directory Name
 cd url-shortener                # Change to the created Directory
 ```
-Import the Python and lambda scripts available in the repo
-
-Create & Activate Virtual Environment
--------------------------------------
-```
-python -m venv .venv         # For Linux / MAC
-source venv/source/activate  # For Windows
-```
 CDK Init - To Initialze
 -------------------------------------
 ```
@@ -38,11 +30,29 @@ cdk init app --language python  # To initialize the CDK
 Refer the below output:
 
 ![CDK_INIT](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/cdk_init.jpg)
+Import the Python and lambda scripts available in the repo
+
+Replace the lambda code and short-url python code as per the below file-structure
+
+![CDK_INIT]([https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/cdk_init.jpg](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/file_structure.jpg))
+
+Install requirements.txt
+------------------------
+```
+pip install -r requirements.txt
+```
+
+Create & Activate Virtual Environment
+-------------------------------------
+```
+python -m venv .venv         # For Linux / MAC
+source venv/source/activate  # For Windows
+```
 
 CDK Bootstrap - To establish connectivity between the env and aws account
 -------------------------------------------------------------------------
 ```
-cdk bootstrap aws://<ACCOUNT-ID>/us-east-1   # Enter the command as per account-id and region using for the deployment
+cdk bootstrap aws://<AWS-ACCOUNT-ID>/<AWS-REGION>   # Enter the command as per account-id and region using for the deployment
 ```
 
 CDK Diff - To view the resources in the stack need to be created
