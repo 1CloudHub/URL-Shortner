@@ -30,8 +30,9 @@ cdk init app --language python  # To initialize the CDK
 Refer the below output:
 
 ![CDK_INIT](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/cdk_init.jpg)
-Import the Python and lambda scripts available in the repo
 
+Import the Python and lambda scripts available in the repo
+---------------------------------------------------------------------------------
 Replace the lambda code and short-url python code as per the below file-structure
 
 ![CDK_INIT](https://raw.githubusercontent.com/1CloudHub/URL-Shortner/main/Images/file_structure.jpg)
